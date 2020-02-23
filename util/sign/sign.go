@@ -49,6 +49,17 @@ func (sign *Sign) GenSign() {
 	sign.Sign = strings.ToLower(fmt.Sprintf("%x", sum))
 }
 
+func (sign *Sign) GenSignByParams(t int64, nonceStr string) string {
+
+	sign.Time = t
+	sign.NonceStr = nonceStr
+
+	signStr := fmt.Sprintf("%v&%v&%v&%v", sign.PartnerCode, sign.Time, sign.NonceStr, sign.CredentialCode)
+
+	sum := sha256.Sum256([]byte(signStr))
+	return strings.ToLower(fmt.Sprintf("%x", sum))
+}
+
 func (sign *Sign) GenSignURL(host string) string {
 
 	sign.GenSign()
