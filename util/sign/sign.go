@@ -40,7 +40,7 @@ func NewSign(partnerCode string, credentialCode string) *Sign {
 
 func (sign *Sign) GenSign() {
 
-	sign.Time = time.Now().UTC().Unix()
+	sign.Time = time.Now().UTC().UnixNano() / 1e6 //UTC毫秒时间戳
 	sign.NonceStr = createRandomString(15)
 
 	signStr := fmt.Sprintf("%v&%v&%v&%v", sign.PartnerCode, sign.Time, sign.NonceStr, sign.CredentialCode)
