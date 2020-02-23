@@ -18,10 +18,6 @@ type Sign struct {
 	Sign           string //签名
 }
 
-func (sign *Sign) SetBody(body string) {
-	sign.Body = body
-}
-
 func createRandomString(len int) string {
 	var container string
 	var str = "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ1234567890"
@@ -48,13 +44,14 @@ func (sign *Sign) GenSign() {
 	sign.NonceStr = createRandomString(15)
 
 	signStr := fmt.Sprintf("%v&%v&%v&%v", sign.PartnerCode, sign.Time, sign.NonceStr, sign.CredentialCode)
-	sign.Sign = strings.ToLower(sha256.Sum256([]byte(signStr)))
 
+	sum := sha256.Sum256([]byte(signStr))
+	sign.Sign = strings.ToLower(fmt.Sprintf("%x", sum))
 }
 
 func (sign *Sign) GenSignURL(host string) string {
 
-	GenSign()
+	sign.GenSign()
 	query := fmt.Sprintf("time=%v&nonce_str=%v&sign=%v", sign.Time, sign.NonceStr, sign.Sign)
 	return host + "?" + query
 }
