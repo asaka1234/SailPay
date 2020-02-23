@@ -12,10 +12,14 @@ import (
 
 type Sign struct {
 	PartnerCode    string //商户编码
-	Time           string //UTC毫秒时间戳
+	Time           int64  //UTC毫秒时间戳
 	NonceStr       string //随机字符串(建议长度在10到30位)
 	CredentialCode string //系统为商户分配的开发校验码
 	Sign           string //签名
+}
+
+func (sign *Sign) SetBody(body string) {
+	sign.Body = body
 }
 
 func createRandomString(len int) string {
@@ -49,8 +53,8 @@ func (sign *Sign) GenSign() {
 }
 
 func (sign *Sign) GenSignURL(host string) string {
-	GenSign()
 
-	query := fmt.Sprintf("%v&%v&%v", sign.Time, sign.NonceStr, sign.Sign)
+	GenSign()
+	query := fmt.Sprintf("time=%v&nonce_str=%v&sign=%v", sign.Time, sign.NonceStr, sign.Sign)
 	return host + "?" + query
 }
