@@ -4,8 +4,8 @@ import (
 	"encoding/json"
 	"fmt"
 
-	"github.com/parnurzeal/gorequest"
 	"github.com/cyrildou/GlobePay/util/sign"
+	"github.com/parnurzeal/gorequest"
 )
 
 // 生成账单
@@ -16,10 +16,9 @@ func (client *GlobePayClient) GenMinipOrder(orderID string, request MinipOrderRe
 
 	var urlResp MinipOrderResponse
 
-
 	url := fmt.Sprintf(MINIPROGRAM_GEN_ORDER_URL_FORMAT, client.PartnerCode, orderID)
 	//需要增加query参数
-	nSign := sign.NewSign(client.PartnerCode,client.CredentialCode)
+	nSign := sign.NewSign(client.PartnerCode, client.CredentialCode)
 	rawURL := nSign.GenSignURL(url)
 
 	paramJSON, _ := json.Marshal(request)
