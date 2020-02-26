@@ -54,3 +54,16 @@ type MinipOrderResponse struct {
 	//错误的返回
 	ReturnMsg string `json:"return_msg"`
 }
+
+//汇率
+type ExchangeRateResponse struct {
+	ReturnCode string `json:"return_code"` //执行结果
+
+	//正确的返回
+	WechatRate       float64 `json:"wechat_rate"`        //微信汇率
+	AlipayRetailRate float64 `json:"alipay_retail_rate"` //支付宝线下渠道汇率
+	AlipayOnlineRate float64 `json:"alipay_online_rate"` //支付宝线上渠道汇率
+
+	//错误的返回
+	ReturnMsg string `json:"return_msg"`
+}
