@@ -1,0 +1,1 @@
+api官网: https://pay.globepay.co/docs/cn/#api-_
