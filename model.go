@@ -43,13 +43,13 @@ type MinipOrderResponse struct {
 	ReturnCode string `json:"return_code"` //执行结果
 
 	//正确的返回
-	ResultCode     string `json:"result_code"`      //SUCCESS表示创建订单成功，EXISTS表示订单已存在
-	PartnerCode    string `json:"partner_code"`     //商户编码
-	FullName       string `json:"full_name"`        //商户注册全名
-	PartnerName    string `json:"partner_name"`     //商户名称
-	OrderID        string `json:"order_id"`         //GlobePay订单ID，同时也是微信订单ID，最终支付成功的订单ID可能不同
-	PartnerOrderID string `json:"partner_order_id"` //商户订单ID
-	SDKParams      string `json:"sdk_params"`       //小程序openid
+	ResultCode     string            `json:"result_code"`      //SUCCESS表示创建订单成功，EXISTS表示订单已存在
+	PartnerCode    string            `json:"partner_code"`     //商户编码
+	FullName       string            `json:"full_name"`        //商户注册全名
+	PartnerName    string            `json:"partner_name"`     //商户名称
+	OrderID        string            `json:"order_id"`         //GlobePay订单ID，同时也是微信订单ID，最终支付成功的订单ID可能不同
+	PartnerOrderID string            `json:"partner_order_id"` //商户订单ID
+	SDKParams      map[string]string `json:"sdk_params"`       //小程序openid
 
 	//错误的返回
 	ReturnMsg string `json:"return_msg"`
