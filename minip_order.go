@@ -31,3 +31,16 @@ func (client *GlobePayClient) GenMinipOrder(orderID string, request MinipOrderRe
 		return true, urlResp
 	}
 }
+
+func (client *GlobePayClient) GenNewMinipOrder(orderID string, request MinipOrderRequest) (gorequest.Response, string, []error) {
+
+	url := fmt.Sprintf(MINIPROGRAM_GEN_ORDER_URL_FORMAT, client.PartnerCode, orderID)
+	//需要增加query参数
+	nSign := sign.NewSign(client.PartnerCode, client.CredentialCode)
+	rawURL := nSign.GenSignURL(url)
+
+	paramJSON, _ := json.Marshal(request)
+	paramStr := string(paramJSON)
+
+	return gorequest.New().Put(rawURL).Send(paramStr).End()
+}
