@@ -143,29 +143,29 @@ type QueryBalanceData struct {
 
 // 回调收到的数据
 type UnifiedOrderNotify struct {
-	PayOrderId string `json:"payOrderId"` //商户生成的订单号
-	MchNo      string `json:"mchNo"`      //商户号
-	AppId      string `json:"appId"`      //应用ID
-	MchOrderNo string `json:"mchOrderNo"` //商户生成的订单号
-	IfCode     string `json:"ifCode"`     //支付接口编码
-	WayCode    string `json:"wayCode"`    //支付方式
-	Amount     int    `json:"amount"`     //支付金额,单位分
-	Currency   string `json:"currency"`   //三位货币代码,印度卢比:inr
-	State      int    `json:"state"`      //支付订单状态
-	Subject    string `json:"subject"`    //商品标题
-	Body       string `json:"body"`       //商品描述
-	ExtParam   string `json:"extParam"`   //商户扩展参数,回调时会原样返回
-	CreatedAt  int64  `json:"createdAt"`  //订单创建时间,13位时间戳
-	ReqTime    string `json:"reqTime"`    //请求接口时间,13位时间戳
+	PayOrderId string `json:"payOrderId" structs:"payOrderId"` //商户生成的订单号
+	MchNo      string `json:"mchNo" structs:"mchNo"`           //商户号
+	AppId      string `json:"appId" structs:"appId"`           //应用ID
+	MchOrderNo string `json:"mchOrderNo" structs:"mchOrderNo"` //商户生成的订单号
+	IfCode     string `json:"ifCode" structs:"ifCode"`         //支付接口编码
+	WayCode    string `json:"wayCode" structs:"wayCode"`       //支付方式
+	Amount     int    `json:"amount" structs:"amount"`         //支付金额,单位分
+	Currency   string `json:"currency" structs:"currency"`     //三位货币代码,印度卢比:inr
+	State      int    `json:"state" structs:"state"`           //支付订单状态
+	Subject    string `json:"subject" structs:"subject"`       //商品标题
+	Body       string `json:"body" structs:"body"`             //商品描述
+	ExtParam   string `json:"extParam" structs:"extParam"`     //商户扩展参数,回调时会原样返回
+	CreatedAt  int64  `json:"createdAt" structs:"createdAt"`   //订单创建时间,13位时间戳
+	ReqTime    string `json:"reqTime" structs:"reqTime"`       //请求接口时间,13位时间戳
 	//可选返回
-	ClientIp       string `json:"clientIp"`       //客户端IPV4地址
-	ChannelOrderNo string `json:"channelOrderNo"` //对应渠道的订单号
-	ErrCode        string `json:"errCode"`        //渠道下单返回错误码
-	ErrMsg         string `json:"errMsg"`         //渠道下单返回错误描述
-	SuccessTime    int64  `json:"successTime"`    //订单支付成功时间,13位时间戳
+	ClientIp       string `json:"clientIp" structs:"clientIp"`             //客户端IPV4地址
+	ChannelOrderNo string `json:"channelOrderNo" structs:"channelOrderNo"` //对应渠道的订单号
+	ErrCode        string `json:"errCode" structs:"errCode"`               //渠道下单返回错误码
+	ErrMsg         string `json:"errMsg" structs:"errMsg"`                 //渠道下单返回错误描述
+	SuccessTime    int64  `json:"successTime" structs:"successTime"`       //订单支付成功时间,13位时间戳
 
 	//签名值
-	Sign string `json:"sign"` //签名值
+	Sign string `json:"sign" structs:"sign"` //签名值
 }
 
 //-------------------------------------------------------
