@@ -1,15 +1,56 @@
 package sign
 
 import (
+	"bytes"
 	"crypto/md5"
 	"encoding/hex"
 	"fmt"
 	"sort"
+	"strconv"
 	"strings"
 )
 
+func GenSign(params map[string]interface{}, privateSecret string) string {
+	md5ctx := md5.New()
+	keys := make([]string, 0, len(params))
+
+	for k := range params {
+		if k == "sign" {
+			continue
+		}
+		keys = append(keys, k)
+	}
+	sort.Strings(keys)
+	var buf bytes.Buffer
+	for _, k := range keys {
+		vs := params[k]
+		if vs == "" {
+			continue
+		}
+		if buf.Len() > 0 {
+			buf.WriteByte('&')
+		}
+
+		buf.WriteString(k)
+		buf.WriteByte('=')
+		//类型检查
+		switch vv := vs.(type) {
+		case string:
+			buf.WriteString(vv)
+		case int:
+			buf.WriteString(strconv.FormatInt(int64(vv), 10))
+		default:
+			panic("params type not supported")
+		}
+	}
+	buf.WriteString(fmt.Sprintf("&key=%s", privateSecret))
+	md5ctx.Write([]byte(buf.String()))
+	return strings.ToUpper(hex.EncodeToString(md5ctx.Sum(nil)))
+}
+
 // 计算签名
-func GenSign(params map[string]string, privateSecret string) string {
+func GenSign2(params map[string]string, privateSecret string) string {
+
 	// 对请求参数按照字母顺序进行排序并组合
 	keys := make([]string, 0, len(params))
 	for k := range params {
