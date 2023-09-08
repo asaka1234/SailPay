@@ -156,9 +156,9 @@ type UnifiedOrderNotify struct {
 	Body       string `json:"body"`       //商品描述
 	ExtParam   string `json:"extParam"`   //商户扩展参数,回调时会原样返回
 	CreatedAt  int64  `json:"createdAt"`  //订单创建时间,13位时间戳
-	ReqTime    int64  `json:"reqTime"`    //请求接口时间,13位时间戳
+	ReqTime    string `json:"reqTime"`    //请求接口时间,13位时间戳
 	//可选返回
-	ClientIp       int64  `json:"clientIp"`       //客户端IPV4地址
+	ClientIp       string `json:"clientIp"`       //客户端IPV4地址
 	ChannelOrderNo string `json:"channelOrderNo"` //对应渠道的订单号
 	ErrCode        string `json:"errCode"`        //渠道下单返回错误码
 	ErrMsg         string `json:"errMsg"`         //渠道下单返回错误描述
