@@ -1,19 +1,19 @@
-package globepay_client
+package sailpay_client
 
-type GlobePayClient struct {
+type SailPayClient struct {
 	PartnerCode    string
 	CredentialCode string
 }
 
 // 实例化请求端
-func NewGlobePayClient(partnerCode string, credentialCode string) *GlobePayClient {
-	var client GlobePayClient
+func NewSailPayClient(partnerCode string, credentialCode string) *SailPayClient {
+	var client SailPayClient
 	client.PartnerCode = partnerCode
 	client.CredentialCode = credentialCode
 	return &client
 }
 
-//小程序订单-请求
+// 小程序订单-请求
 type MinipOrderRequest struct {
 	Description string `json:"description"` //订单标题（最大长度128字符，超出自动截取）
 	Price       int    `json:"price"`       //金额，单位为货币最小单位，例如使用100表示GBP1.00
@@ -55,7 +55,7 @@ type MinipOrderResponse struct {
 	ReturnMsg string `json:"return_msg"`
 }
 
-//汇率
+// 汇率
 type ExchangeRateResponse struct {
 	ReturnCode string `json:"return_code"` //执行结果
 

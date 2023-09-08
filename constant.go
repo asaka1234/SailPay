@@ -1,4 +1,4 @@
-package globepay_client
+package sailpay_client
 
 const (
 

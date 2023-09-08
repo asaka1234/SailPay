@@ -1,16 +1,15 @@
-package globepay_client
+package sailpay_client
 
 import (
 	"fmt"
-
-	"github.com/cyrildou/GlobePay/util/sign"
 	"github.com/parnurzeal/gorequest"
+	"logtech.com/pay/SailPay/util/sign"
 )
 
 /*
-	获取当前汇率
+获取当前汇率
 */
-func (client *GlobePayClient) GetExchangeRate() (bool, ExchangeRateResponse) {
+func (client *SailPayClient) GetExchangeRate() (bool, ExchangeRateResponse) {
 
 	var urlResp ExchangeRateResponse
 

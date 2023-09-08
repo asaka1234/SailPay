@@ -1,4 +1,4 @@
-package globepay_client
+package sailpay_client
 
 import (
 	"fmt"
@@ -7,7 +7,7 @@ import (
 
 func TestGetExchangeRate(t *testing.T) {
 
-	client := NewGlobePayClient(PartnerCode, CredentialCode)
+	client := NewSailPayClient(PartnerCode, CredentialCode)
 	isSucceed, response := client.GetExchangeRate()
 	fmt.Printf("%v %v", isSucceed, response)
 }

@@ -1,18 +1,17 @@
-package globepay_client
+package sailpay_client
 
 import (
 	"encoding/json"
 	"fmt"
-
-	"github.com/cyrildou/GlobePay/util/sign"
 	"github.com/parnurzeal/gorequest"
+	"logtech.com/pay/SailPay/util/sign"
 )
 
 // 生成账单
 /*
 	orderID 商户内部订单id，要求同一商户唯一
 */
-func (client *GlobePayClient) GenMinipOrder(orderID string, request MinipOrderRequest) (bool, MinipOrderResponse) {
+func (client *SailPayClient) GenMinipOrder(orderID string, request MinipOrderRequest) (bool, MinipOrderResponse) {
 
 	var urlResp MinipOrderResponse
 
@@ -32,7 +31,7 @@ func (client *GlobePayClient) GenMinipOrder(orderID string, request MinipOrderRe
 	}
 }
 
-func (client *GlobePayClient) GenNewMinipOrder(orderID string, request MinipOrderRequest) (gorequest.Response, string, []error) {
+func (client *SailPayClient) GenNewMinipOrder(orderID string, request MinipOrderRequest) (gorequest.Response, string, []error) {
 
 	url := fmt.Sprintf(MINIPROGRAM_GEN_ORDER_URL_FORMAT, client.PartnerCode, orderID)
 	//需要增加query参数
