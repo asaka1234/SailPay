@@ -3,7 +3,7 @@ package sailpay_client
 import (
 	"encoding/json"
 	"fmt"
-	"github.com/cyrilou/SailPay/util/sign"
+	"github.com/cyrildou/SailPay/util/sign"
 	"github.com/fatih/structs"
 	"github.com/parnurzeal/gorequest"
 	"golang.org/x/exp/maps"
