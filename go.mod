@@ -1,4 +1,4 @@
-module logtech.com/pay/SailPay
+module github.com/cyrildou/SailPay
 
 go 1.20
 

@@ -3,10 +3,10 @@ package sailpay_client
 import (
 	"encoding/json"
 	"fmt"
+	"github.com/cyrilou/SailPay/util/sign"
 	"github.com/fatih/structs"
 	"github.com/parnurzeal/gorequest"
 	"golang.org/x/exp/maps"
-	"logtech.com/pay/SailPay/util/sign"
 	"time"
 )
 
