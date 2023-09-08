@@ -42,10 +42,10 @@ type UnifiedOrderRequest struct {
 	ExtParam string `json:"extParam" structs:"extParam"` //商户扩展参数json格式字符串 至少有country参数字段 ,回调时会原样返回
 
 	//可选参数
-	ExpiredTime  int    `json:"expiredTime" structs:"expiredTime"`   //订单失效时间,单位秒,默认2小时.订单在(创建时间+失效时间)后失效
-	ClientIp     string `json:"clientIp" structs:"clientIp"`         //客户端IPV4地址
-	ChannelExtra string `json:"channelExtra" structs:"channelExtra"` //特定渠道发起的额外参数,json格式字符串.详见渠道参数说明
-	DivisionMode int    `json:"divisionMode" structs:"divisionMode"` //分账模式
+	ExpiredTime  int    `json:"expiredTime,omitempty" structs:"expiredTime,omitempty"`   //订单失效时间,单位秒,默认2小时.订单在(创建时间+失效时间)后失效
+	ClientIp     string `json:"clientIp,omitempty" structs:"clientIp,omitempty"`         //客户端IPV4地址
+	ChannelExtra string `json:"channelExtra,omitempty" structs:"channelExtra,omitempty"` //特定渠道发起的额外参数,json格式字符串.详见渠道参数说明
+	DivisionMode int    `json:"divisionMode,omitempty" structs:"divisionMode,omitempty"` //分账模式
 }
 
 // 统一订单-返回
@@ -158,11 +158,11 @@ type UnifiedOrderNotify struct {
 	CreatedAt  int64  `json:"createdAt" structs:"createdAt"`   //订单创建时间,13位时间戳
 	ReqTime    string `json:"reqTime" structs:"reqTime"`       //请求接口时间,13位时间戳
 	//可选返回
-	ClientIp       string `json:"clientIp" structs:"clientIp"`             //客户端IPV4地址
-	ChannelOrderNo string `json:"channelOrderNo" structs:"channelOrderNo"` //对应渠道的订单号
-	ErrCode        string `json:"errCode" structs:"errCode"`               //渠道下单返回错误码
-	ErrMsg         string `json:"errMsg" structs:"errMsg"`                 //渠道下单返回错误描述
-	SuccessTime    int64  `json:"successTime" structs:"successTime"`       //订单支付成功时间,13位时间戳
+	ClientIp       string `json:"clientIp,omitempty" structs:"clientIp,omitempty"`       //客户端IPV4地址
+	ChannelOrderNo string `json:"channelOrderNo" structs:"channelOrderNo"`               //对应渠道的订单号
+	ErrCode        string `json:"errCode,omitempty" structs:"errCode,omitempty"`         //渠道下单返回错误码
+	ErrMsg         string `json:"errMsg,omitempty" structs:"errMsg,omitempty"`           //渠道下单返回错误描述
+	SuccessTime    int64  `json:"successTime,omitempty" structs:"successTime,omitempty"` //订单支付成功时间,13位时间戳
 
 	//签名值
 	Sign string `json:"sign" structs:"sign"` //签名值
