@@ -23,7 +23,7 @@ func (client *SailPayClient) GetBalanceInfo(request QueryBalanceRequest) (bool, 
 	commonReq := CommonRequestInfo{
 		MchNo:    client.MchNo,           //商户号
 		AppId:    client.AppId,           //应用ID
-		ReqTime:  time.Now().UnixMicro(), //请求时间
+		ReqTime:  time.Now().UnixMilli(), //请求时间
 		Version:  "1.0",                  //接口版本号，固定：1.0
 		SignType: "MD5",                  //签名类型，目前只支持MD5方式
 	}
@@ -50,9 +50,12 @@ func (client *SailPayClient) GetBalanceInfo(request QueryBalanceRequest) (bool, 
 	paramJSON, _ := json.Marshal(result)
 	paramStr := string(paramJSON)
 
+	fmt.Printf("json body=%s\n", paramStr)
+
 	//发送请求
 	_, _, errs := gorequest.New().Post(url).Send(paramStr).EndStruct(&urlResp)
 	if errs != nil {
+		fmt.Printf("---1----%+v\n", errs)
 		return false, QueryBalanceResponse{}
 	} else {
 		return true, urlResp

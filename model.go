@@ -29,16 +29,14 @@ type CommonRequestInfo struct {
 
 // 统一订单-请求
 type UnifiedOrderRequest struct {
-	//CommonRequestInfo
-
-	MchOrderNo string `json:"mchOrderNo" structs:"amount"`   //商户生成的订单号
-	WayCode    string `json:"wayCode" structs:"wayCode"`     //支付方式
-	Amount     int    `json:"amount" structs:"amount"`       //支付金额,单位分
-	Currency   string `json:"currency" structs:"currency"`   //三位货币代码,印度卢比:inr
-	Subject    string `json:"subject" structs:"subject"`     //商品标题
-	Body       string `json:"body" structs:"body"`           //商品描述
-	NotifyUrl  string `json:"notifyUrl" structs:"notifyUrl"` //支付结果异步回调URL
-	ReturnUrl  string `json:"returnUrl" structs:"returnUrl"` //支付结果同步跳转通知URL
+	MchOrderNo string `json:"mchOrderNo" structs:"mchOrderNo"` //商户生成的订单号
+	WayCode    string `json:"wayCode" structs:"wayCode"`       //支付方式
+	Amount     int    `json:"amount" structs:"amount"`         //支付金额,单位分
+	Currency   string `json:"currency" structs:"currency"`     //三位货币代码,印度卢比:inr
+	Subject    string `json:"subject" structs:"subject"`       //商品标题
+	Body       string `json:"body" structs:"body"`             //商品描述
+	NotifyUrl  string `json:"notifyUrl" structs:"notifyUrl"`   //支付结果异步回调URL
+	ReturnUrl  string `json:"returnUrl" structs:"returnUrl"`   //支付结果同步跳转通知URL
 	//Version     string       `json:"version"`     //接口版本号，固定：1.0
 	//SignType    string       `json:"signType"`    //签名类型，目前只支持MD5方式
 	ExtParam string `json:"extParam" structs:"extParam"` //商户扩展参数json格式字符串 至少有country参数字段 ,回调时会原样返回
@@ -65,7 +63,7 @@ type UnifiedOrderData struct {
 	PayOrderId  string `json:"payOrderId"`  //支付订单号
 	MchOrderNo  string `json:"mchOrderNo"`  //商户传入的订单号
 	OrderState  int    `json:"orderState"`  //支付订单状态
-	PayDataType int    `json:"payDataType"` //支付参数类型
+	PayDataType string `json:"payDataType"` //支付参数类型
 	//可选返回
 	PayData string `json:"payData"` //发起支付用到的支付参数
 	ErrCode string `json:"errCode"` //上游渠道返回的错误码
@@ -76,7 +74,6 @@ type UnifiedOrderData struct {
 
 // 查询订单
 type QueryOrderRequest struct {
-	CommonRequestInfo
 	PayOrderId string `json:"payOrderId" structs:"payOrderId"` //支付中心生成的订单号，与mchOrderNo二者传一即可
 	MchOrderNo string `json:"mchOrderNo" structs:"mchOrderNo"` //商户生成的订单号，与payOrderId二者传一即可
 }
@@ -118,7 +115,6 @@ type QueryOrderData struct {
 
 // 查询余额
 type QueryBalanceRequest struct {
-	CommonRequestInfo
 	Currency string `json:"currency" structs:"currency"` //三位货币编号,如 巴西雷亚尔 BRL
 }
 

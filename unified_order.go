@@ -24,7 +24,7 @@ func (client *SailPayClient) PlaceUnifiedOrder(request UnifiedOrderRequest) (boo
 	commonReq := CommonRequestInfo{
 		MchNo:    client.MchNo,           //商户号
 		AppId:    client.AppId,           //应用ID
-		ReqTime:  time.Now().UnixMicro(), //请求时间
+		ReqTime:  time.Now().UnixMilli(), //请求时间
 		Version:  "1.0",                  //接口版本号，固定：1.0
 		SignType: "MD5",                  //签名类型，目前只支持MD5方式
 	}
@@ -35,7 +35,6 @@ func (client *SailPayClient) PlaceUnifiedOrder(request UnifiedOrderRequest) (boo
 	maps.Copy(rawParams, commonParams)
 	signVal := sign.GenSign(rawParams, client.PrivateSecret)
 	commonReq.Sign = signVal //签名值
-	fmt.Printf("rawSignStr = %+v\n", rawParams)
 	fmt.Printf("sign = %+v\n", signVal)
 
 	//合并复制
@@ -51,13 +50,15 @@ func (client *SailPayClient) PlaceUnifiedOrder(request UnifiedOrderRequest) (boo
 	//构造请求body
 	paramJSON, _ := json.Marshal(result)
 	paramStr := string(paramJSON)
-	fmt.Printf("body = %+v+\n", paramStr)
+	fmt.Printf("json body=%+v+\n", paramStr)
 
 	//发送请求
 	_, _, errs := gorequest.New().Post(url).Send(paramStr).EndStruct(&urlResp)
 	if errs != nil {
+		fmt.Printf("---1----%+v\n", errs)
 		return false, UnifiedOrderResponse{}
 	} else {
+		fmt.Printf("---2----\n")
 		return true, urlResp
 	}
 }

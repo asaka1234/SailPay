@@ -47,7 +47,7 @@ func GenSign(params map[string]interface{}, privateSecret string) string {
 	}
 	buf.WriteString(fmt.Sprintf("&key=%s", privateSecret))
 
-	fmt.Printf("rawStr = %s\n", buf.String())
+	fmt.Printf("rawSignStr = %s\n", buf.String())
 	md5ctx.Write([]byte(buf.String()))
 	return strings.ToUpper(hex.EncodeToString(md5ctx.Sum(nil)))
 }
