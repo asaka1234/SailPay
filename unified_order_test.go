@@ -5,34 +5,26 @@ import (
 	"testing"
 )
 
-func TestGenMinipOrder(t *testing.T) {
-	orderID := "12223344345"
+// 下单
+func TestPlaceOrder(t *testing.T) {
+	orderId := "exlink1624005107281"
 
-	client := NewSailPayClient(PartnerCode, CredentialCode)
-	isSucceed, response := client.GenMinipOrder(orderID, MinipOrderRequest{
-		Description: "desc",                 //订单标题（最大长度128字符，超出自动截取）
-		Price:       1,                      //金额，单位为货币最小单位，例如使用100表示GBP1.00
-		Currency:    "CNY",                  //币种代码 默认值: GBP,允许值: GBP, CNY
-		NotifyURL:   "http://www.baidu.com", //支付通知url，详见支付通知api，不填则不会推送支付通知
-		Operator:    "操作员",                  //操作人员标识
-		Appid:       AppID,                  //小程序appid
-		CustomerID:  CustomerID,             //小程序openid
+	client := NewSailPayClient(MchNo, AppId, PrivateSecret)
+	isSucceed, response := client.PlaceUnifiedOrder(UnifiedOrderRequest{
+		MchOrderNo: orderId,
+		WayCode:    "SAIL_CASHIER",
+		Amount:     1000,
+		Currency:   "inr",
+		Subject:    "GOODS",
+		Body:       "GoodsDesc",
+		NotifyUrl:  "https://www.yourdomain.com/notifyUrl",
+		ReturnUrl:  "https://www.yourdomain.com/returnUrl",
+		ExtParam:   "{\"firstname\":\"Jamer\",\"lastname\":\"havi\",\"city\":\"Mubai\",\"phone\":\"8901000001\",\"email\":\"havi@gmail.com\",\"country\":\"IN\",\"address\":\"test\",\"state\":\"mh\",\"postcode\":\"23456\"}",
+		//可选
+		ExpiredTime:  3600,
+		ClientIp:     "192.166.1.132",
+		ChannelExtra: "{\"authCode\":\"280812820366966512\"}",
+		DivisionMode: 1,
 	})
-	fmt.Printf("%v %v", isSucceed, response)
-}
-
-func TestGenNewMinipOrder(t *testing.T) {
-	orderID := "12223344345"
-
-	client := NewSailPayClient(PartnerCode, CredentialCode)
-	isSucceed, response, err := client.GenNewMinipOrder(orderID, MinipOrderRequest{
-		Description: "desc",                 //订单标题（最大长度128字符，超出自动截取）
-		Price:       1,                      //金额，单位为货币最小单位，例如使用100表示GBP1.00
-		Currency:    "CNY",                  //币种代码 默认值: GBP,允许值: GBP, CNY
-		NotifyURL:   "http://www.baidu.com", //支付通知url，详见支付通知api，不填则不会推送支付通知
-		Operator:    "操作员",                  //操作人员标识
-		Appid:       AppID,                  //小程序appid
-		CustomerID:  CustomerID,             //小程序openid
-	})
-	fmt.Printf("%v %v %v", isSucceed, response, err)
+	fmt.Printf("result=%v\nresp=%v+\n", isSucceed, response)
 }

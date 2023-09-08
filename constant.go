@@ -1,48 +1,54 @@
 package sailpay_client
 
-type PayWayCode string
-type CurrencyCode string
-type DivisionMode int
-type OrderState int
-type PayDataType string
+//type PayWayCode string
+//type CurrencyCode string
+//type DivisionMode int
+//type OrderState int
+//type PayDataType string
+
+const (
+	MchNo         = "M1679210601" //分配的商户号
+	AppId         = "6416b86a79fc2b78402dbb3f"
+	PrivateSecret = "XcX2XbEUGkklmv8OREpQBoE0xBA0VMNXATigyRHFCE3NC6puxX9l8RiPudJLJ6LB4lSbnikFH2mNFiiDZypmNOlDmCnrmJeFnX44giVf8vpOqiLLr4GRIb9uJG0V0KxI" //分配的私钥
+)
 
 // 支付方式
 const (
-	SailCashier    PayWayCode = "SAIL_CASHIER"     //测试收单
-	SailCashierBrl PayWayCode = "SAIL_CASHIER_BRL" //巴西收单
-	SailCashierInr PayWayCode = "SAIL_CASHIER_INR" //印度收单
+	SailCashier    string = "SAIL_CASHIER"     //测试收单
+	SailCashierBrl string = "SAIL_CASHIER_BRL" //巴西收单
+	SailCashierInr string = "SAIL_CASHIER_INR" //印度收单
 )
 
 // 货币编码
 const (
-	Inr CurrencyCode = "inr" //印度卢比
+	Inr string = "inr" //印度卢比
 )
 
 // 分账模式
 const (
-	NoDivision     DivisionMode = 0 //- 该笔订单不允许分账[默认],
-	AutoDivision   DivisionMode = 1 //- 支付成功按配置自动完成分账,
-	ManualDivision DivisionMode = 2 //- 商户手动分账(解冻商户金额)
+	NoDivision     int = 0 //- 该笔订单不允许分账[默认],
+	AutoDivision   int = 1 //- 支付成功按配置自动完成分账,
+	ManualDivision int = 2 //- 商户手动分账(解冻商户金额)
 )
 
 // 订单状态
 const (
-	StateCreate     OrderState = 0 //-订单生成
-	StatePaying     OrderState = 1 //-支付中
-	StatePaySucceed OrderState = 2 //-支付成功
-	StatePayFailed  OrderState = 3 //-支付失败
-	StateCanceled   OrderState = 4 //-已撤销
-	StateChargeBack OrderState = 5 //-已退款
-	StateClosed     OrderState = 6 //-订单关闭
+	StateCreate     int = 0 //-订单生成
+	StatePaying     int = 1 //-支付中
+	StatePaySucceed int = 2 //-支付成功
+	StatePayFailed  int = 3 //-支付失败
+	StateCanceled   int = 4 //-已撤销
+	StateChargeBack int = 5 //-已退款
+	StateClosed     int = 6 //-订单关闭
 )
 
 // 货币编码
 const (
-	PayUrl     PayDataType = "payUrl"     //-跳转链接的方式
-	Form       PayDataType = "form"       //-表单方式
-	CodeUrl    PayDataType = "codeUrl"    //-二维码地址
-	CodeImgUrl PayDataType = "codeImgUrl" //-二维码图片地址
-	None       PayDataType = "none"       //-空支付参数
+	PayUrl     string = "payUrl"     //-跳转链接的方式
+	Form       string = "form"       //-表单方式
+	CodeUrl    string = "codeUrl"    //-二维码地址
+	CodeImgUrl string = "codeImgUrl" //-二维码图片地址
+	None       string = "none"       //-空支付参数
 )
 
 const (
@@ -53,9 +59,4 @@ const (
 	QUERY_ORDER_URL = "https://query.sailpayment.com/api/pay/query"
 	//查询余额
 	QUERY_BALANCE_URL = "https://query.sailpayment.com/api/balance/query"
-)
-
-const (
-	MchNo         = "test"                          //分配的商户号
-	PrivateSecret = "EWEFD123RGSRETYDFNGFGFGSHDFGH" //分配的私钥
 )

@@ -39,11 +39,15 @@ func GenSign(params map[string]interface{}, privateSecret string) string {
 			buf.WriteString(vv)
 		case int:
 			buf.WriteString(strconv.FormatInt(int64(vv), 10))
+		case int64:
+			buf.WriteString(strconv.FormatInt(int64(vv), 10))
 		default:
-			panic("params type not supported")
+			panic(fmt.Sprintf("params type not supported, k=%s, %+v", k, vv))
 		}
 	}
 	buf.WriteString(fmt.Sprintf("&key=%s", privateSecret))
+
+	fmt.Printf("rawStr = %s\n", buf.String())
 	md5ctx.Write([]byte(buf.String()))
 	return strings.ToUpper(hex.EncodeToString(md5ctx.Sum(nil)))
 }
