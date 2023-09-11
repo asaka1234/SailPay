@@ -74,8 +74,8 @@ type UnifiedOrderData struct {
 
 // 查询订单
 type QueryOrderRequest struct {
-	PayOrderId string `json:"payOrderId" structs:"payOrderId"` //支付中心生成的订单号，与mchOrderNo二者传一即可
-	MchOrderNo string `json:"mchOrderNo" structs:"mchOrderNo"` //商户生成的订单号，与payOrderId二者传一即可
+	PayOrderId string `form:"payOrderId" json:"payOrderId" structs:"payOrderId"` //支付中心生成的订单号，与mchOrderNo二者传一即可
+	MchOrderNo string `form:"mchOrderNo" json:"mchOrderNo" structs:"mchOrderNo"` //商户生成的订单号，与payOrderId二者传一即可
 }
 
 // 查询订单-返回
@@ -115,7 +115,7 @@ type QueryOrderData struct {
 
 // 查询余额
 type QueryBalanceRequest struct {
-	Currency string `json:"currency" structs:"currency"` //三位货币编号,如 巴西雷亚尔 BRL
+	Currency string `form:"currency" json:"currency" structs:"currency"` //三位货币编号,如 巴西雷亚尔 BRL
 }
 
 // 查询余额-返回
@@ -143,29 +143,29 @@ type QueryBalanceData struct {
 
 // 回调收到的数据
 type UnifiedOrderNotify struct {
-	PayOrderId string `json:"payOrderId" structs:"payOrderId"` //商户生成的订单号
-	MchNo      string `json:"mchNo" structs:"mchNo"`           //商户号
-	AppId      string `json:"appId" structs:"appId"`           //应用ID
-	MchOrderNo string `json:"mchOrderNo" structs:"mchOrderNo"` //商户生成的订单号
-	IfCode     string `json:"ifCode" structs:"ifCode"`         //支付接口编码
-	WayCode    string `json:"wayCode" structs:"wayCode"`       //支付方式
-	Amount     int    `json:"amount" structs:"amount"`         //支付金额,单位分
-	Currency   string `json:"currency" structs:"currency"`     //三位货币代码,印度卢比:inr
-	State      int    `json:"state" structs:"state"`           //支付订单状态
-	Subject    string `json:"subject" structs:"subject"`       //商品标题
-	Body       string `json:"body" structs:"body"`             //商品描述
-	ExtParam   string `json:"extParam" structs:"extParam"`     //商户扩展参数,回调时会原样返回
-	CreatedAt  int64  `json:"createdAt" structs:"createdAt"`   //订单创建时间,13位时间戳
-	ReqTime    string `json:"reqTime" structs:"reqTime"`       //请求接口时间,13位时间戳
+	PayOrderId string `form:"payOrderId" json:"payOrderId" structs:"payOrderId"` //商户生成的订单号
+	MchNo      string `form:"mchNo" json:"mchNo" structs:"mchNo"`                //商户号
+	AppId      string `form:"appId" json:"appId" structs:"appId"`                //应用ID
+	MchOrderNo string `form:"mchOrderNo" json:"mchOrderNo" structs:"mchOrderNo"` //商户生成的订单号
+	IfCode     string `form:"ifCode" json:"ifCode" structs:"ifCode"`             //支付接口编码
+	WayCode    string `form:"wayCode" json:"wayCode" structs:"wayCode"`          //支付方式
+	Amount     int    `form:"amount" json:"amount" structs:"amount"`             //支付金额,单位分
+	Currency   string `form:"currency" json:"currency" structs:"currency"`       //三位货币代码,印度卢比:inr
+	State      int    `form:"state" json:"state" structs:"state"`                //支付订单状态
+	Subject    string `form:"subject" json:"subject" structs:"subject"`          //商品标题
+	Body       string `form:"body" json:"body" structs:"body"`                   //商品描述
+	ExtParam   string `form:"extParam" json:"extParam" structs:"extParam"`       //商户扩展参数,回调时会原样返回
+	CreatedAt  int64  `form:"createdAt" json:"createdAt" structs:"createdAt"`    //订单创建时间,13位时间戳
+	ReqTime    string `form:"reqTime" json:"reqTime" structs:"reqTime"`          //请求接口时间,13位时间戳
 	//可选返回
-	ClientIp       string `json:"clientIp,omitempty" structs:"clientIp,omitempty"`       //客户端IPV4地址
-	ChannelOrderNo string `json:"channelOrderNo" structs:"channelOrderNo"`               //对应渠道的订单号
-	ErrCode        string `json:"errCode,omitempty" structs:"errCode,omitempty"`         //渠道下单返回错误码
-	ErrMsg         string `json:"errMsg,omitempty" structs:"errMsg,omitempty"`           //渠道下单返回错误描述
-	SuccessTime    int64  `json:"successTime,omitempty" structs:"successTime,omitempty"` //订单支付成功时间,13位时间戳
+	ClientIp       string `form:"clientIp" json:"clientIp,omitempty" structs:"clientIp,omitempty"`          //客户端IPV4地址
+	ChannelOrderNo string `form:"channelOrderNo" json:"channelOrderNo" structs:"channelOrderNo"`            //对应渠道的订单号
+	ErrCode        string `form:"errCode" json:"errCode,omitempty" structs:"errCode,omitempty"`             //渠道下单返回错误码
+	ErrMsg         string `form:"errMsg" json:"errMsg,omitempty" structs:"errMsg,omitempty"`                //渠道下单返回错误描述
+	SuccessTime    int64  `form:"successTime" json:"successTime,omitempty" structs:"successTime,omitempty"` //订单支付成功时间,13位时间戳
 
 	//签名值
-	Sign string `json:"sign" structs:"sign"` //签名值
+	Sign string `form:"sign" json:"sign" structs:"sign"` //签名值
 }
 
 //-------------------------------------------------------
