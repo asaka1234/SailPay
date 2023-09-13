@@ -3,12 +3,14 @@ package sailpay_client
 import (
 	"encoding/json"
 	"fmt"
+	"github.com/cyrildou/SailPay/util/sign"
+	"github.com/fatih/structs"
 	"testing"
 )
 
 // 下单
 func TestPlaceOrder(t *testing.T) {
-	orderId := "exop20230908002"
+	orderId := "exop20230908006"
 
 	params := map[string]string{
 		"firstname": "cy",
@@ -42,5 +44,16 @@ func TestPlaceOrder(t *testing.T) {
 		//ChannelExtra: "{\"authCode\":\"280812820366966512\"}",
 		DivisionMode: 0,
 	})
-	fmt.Printf("result=%v\nresp=%v+\n", isSucceed, response)
+	fmt.Printf("result=%v\nresp=%+v\n", isSucceed, response)
+
+	if response.Code == 0 {
+		//验证返回的签名
+		rawParams := structs.Map(response.Data)
+		signVal := sign.GenSign(rawParams, client.PrivateSecret)
+		if signVal != response.Sign {
+			fmt.Printf("-----sign---err---%s\n", signVal)
+		} else {
+			fmt.Printf("-----sign---succ---%s\n", signVal)
+		}
+	}
 }
