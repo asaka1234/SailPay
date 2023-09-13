@@ -8,18 +8,18 @@ import (
 
 // 下单
 func TestPlaceOrder(t *testing.T) {
-	orderId := "exl2ink1a07281"
+	orderId := "exop20230908002"
 
 	params := map[string]string{
-		"firstname": "Jamer",
-		"lastname":  "havi",
-		"city":      "Mubai",
-		"phone":     "8901000001",
-		"email":     "havi@gmail.com",
+		"firstname": "cy",
+		"lastname":  "harper",
+		"city":      "guangzhou",
+		"phone":     "4401000001",
+		"email":     "ck789@gmail.com",
 		"country":   "IN",
-		"address":   "test",
+		"address":   "baiyun district",
 		"state":     "mh",
-		"postcode":  "23456",
+		"postcode":  "232001",
 	}
 	res, _ := json.Marshal(params)
 
@@ -31,16 +31,16 @@ func TestPlaceOrder(t *testing.T) {
 		WayCode:    "SAIL_CASHIER",
 		Amount:     1000,
 		Currency:   "inr",
-		Subject:    "GOODS",
-		Body:       "GoodsDesc",
-		NotifyUrl:  "https://www.yourdomain.com/notifyUrl",
-		ReturnUrl:  "https://www.yourdomain.com/returnUrl",
+		Subject:    "toys",
+		Body:       "toysDesc",
+		NotifyUrl:  "https://www.jpdb001.com/notifyUrl",
+		ReturnUrl:  "https://www.jpdb001.com/returnUrl",
 		ExtParam:   string(res),
 		//可选
 		ExpiredTime: 3600,
 		//ClientIp:    "192.166.1.132",
 		//ChannelExtra: "{\"authCode\":\"280812820366966512\"}",
-		DivisionMode: 1,
+		DivisionMode: 0,
 	})
 	fmt.Printf("result=%v\nresp=%v+\n", isSucceed, response)
 }

@@ -1,6 +1,7 @@
 package sign
 
 import (
+	"encoding/json"
 	"fmt"
 	"testing"
 )
@@ -24,24 +25,38 @@ func TestSign(t *testing.T) {
 
 func TestSign2(t *testing.T) {
 
+	params := map[string]string{
+		"firstname": "cy",
+		"lastname":  "harper",
+		"city":      "guangzhou",
+		"phone":     "4401000001",
+		"email":     "ck789@gmail.com",
+		"country":   "IN",
+		"address":   "baiyun district",
+		"state":     "mh",
+		"postcode":  "232001",
+	}
+	res, _ := json.Marshal(params)
+
 	//代签名query参数
 	signMap2 := map[string]interface{}{
-		"amount":     5,
-		"body":       "GoodsDesc",
-		"clientIp":   "192.166.1.132",
-		"createdAt":  1622016572190,
+		"amount":     1000,
+		"appId":      "6416b86a79fc2b78402dbb3f",
+		"body":       "toysDesc",
+		"clientIp":   "119.57.72.252",
+		"createdAt":  1694180893647,
 		"currency":   "inr",
-		"extParam":   "{}",
+		"extParam":   string(res),
 		"ifCode":     "sailpay",
-		"mchNo":      "M1621873433953",
-		"appId":      "60cc09bce4b0f1c0b83761c9",
-		"mchOrderNo": "mho1621934803068",
-		"payOrderId": "20210525172643357010",
-		"state":      3,
-		"subject":    "GOODS",
+		"mchNo":      "M1679210601",
+		"mchOrderNo": "exop20230908001",
+		"payOrderId": "P1700144009406652417",
+		"reqTime":    1694181364379,
+		"state":      2,
+		"subject":    "toys",
 		"wayCode":    "SAIL_CASHIER",
-		"sign":       "C380BEC2BFD727A4B6845133519F3AD6",
+		//"key":XcX2XbEUGkklmv8OREpQBoE0xBA0VMNXATigyRHFCE3NC6puxX9l8RiPudJLJ6LB4lSbnikFH2mNFiiDZypmNOlDmCnrmJeFnX44giVf8vpOqiLLr4GRIb9uJG0V0KxI,
 	}
-	result2 := GenSign(signMap2, "EWEFD123RGSRETYDFNGFGFGSHDFGH")
+	result2 := GenSign(signMap2, "XcX2XbEUGkklmv8OREpQBoE0xBA0VMNXATigyRHFCE3NC6puxX9l8RiPudJLJ6LB4lSbnikFH2mNFiiDZypmNOlDmCnrmJeFnX44giVf8vpOqiLLr4GRIb9uJG0V0KxI")
 	fmt.Printf("%s\n", result2)
 }
