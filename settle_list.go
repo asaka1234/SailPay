@@ -10,15 +10,14 @@ import (
 	"time"
 )
 
-// 生成账单
 /*
-	orderID 商户内部订单id，要求同一商户唯一
+查询订单结算列表或者未结算列表
 */
-func (client *SailPayClient) PlaceUnifiedOrder(request UnifiedOrderRequest) (bool, UnifiedOrderResponse) {
+func (client *SailPayClient) QuerySettleList(request QuerySettleListRequest) (bool, QuerySettleListResponse) {
 
-	var urlResp UnifiedOrderResponse
+	var urlResp QuerySettleListResponse
 
-	url := UNIFIEDORDER_URL
+	url := QUERY_SETTLE_LIST_URL
 
 	//请求封装公共参数
 	commonReq := CommonRequestInfo{
@@ -35,28 +34,28 @@ func (client *SailPayClient) PlaceUnifiedOrder(request UnifiedOrderRequest) (boo
 	maps.Copy(rawParams, commonParams)
 	signVal := sign.GenSign(rawParams, client.PrivateSecret)
 	commonReq.Sign = signVal //签名值
+	//fmt.Printf("rawSignStr = %+v\n", rawParams)
 	//fmt.Printf("sign = %+v\n", signVal)
 
 	//合并复制
-	type UnifiedOrderRequestFinal struct {
+	type QuerySettleListRequestFinal struct {
 		CommonRequestInfo
-		UnifiedOrderRequest
+		QuerySettleListRequest
 	}
-	result := UnifiedOrderRequestFinal{
+	result := QuerySettleListRequestFinal{
 		commonReq,
 		request,
 	}
-
 	//构造请求body
 	paramJSON, _ := json.Marshal(result)
 	paramStr := string(paramJSON)
-	//fmt.Printf("json body=%+v+\n", paramStr)
+	//fmt.Printf("json body=%s\n", paramStr)
 
 	//发送请求
 	resp, body, errs := gorequest.New().Post(url).Send(paramStr).EndStruct(&urlResp)
 	if errs != nil {
 		fmt.Printf("err: body:%s, resp:%+v, info:%+v\n", body, resp, errs)
-		return false, UnifiedOrderResponse{}
+		return false, QuerySettleListResponse{}
 	} else {
 		return true, urlResp
 	}

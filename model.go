@@ -139,6 +139,43 @@ type QueryBalanceData struct {
 	Frozen      string `json:"frozen" structs:"frozen"`           //冻结资金 单位分
 }
 
+//-------------------------------------------------------
+
+// 查询结算情况
+type QuerySettleListRequest struct {
+	Currency     string `form:"currency" json:"currency" structs:"currency"`             //三位货币编号,如 巴西雷亚尔 BRL
+	CreatedStart string `form:"createdStart" json:"createdStart" structs:"createdStart"` //订单开始时间 可以是yyyy-MM-dd 或者 yyyy-MM-dd HH:mm:ss
+	CreatedEnd   string `form:"createdEnd" json:"createdEnd" structs:"createdEnd"`       //订单结束时间 可以是yyyy-MM-dd 或者 yyyy-MM-dd HH:mm:ss
+	SettleState  string `form:"settleState" json:"settleState" structs:"settleState"`    //结算状态 1-已结算 0-未结算
+	//可选
+	MchOrderNo string `form:"mchOrderNo" json:"mchOrderNo" structs:"mchOrderNo"` //商户生成的订单号
+}
+
+// 查询结算-返回
+type QuerySettleListResponse struct {
+	Code int `json:"code"  structs:"code"` //SUCCESS表示创建订单成功，EXISTS表示订单已存在
+	//可选字段
+	Msg  string              `json:"msg"  structs:"msg,omitempty"`   //消息
+	Sign string              `json:"sign"  structs:"sign,omitempty"` //对data内数据签名,如data为空则不返回
+	Data QuerySettleListData `json:"data"  structs:"data,omitempty"` //返回下单数据,json格式数据
+}
+
+// 查询订单结算状态-data
+type QuerySettleListData struct {
+	//正确的返回
+	Total   int               `json:"total" structs:"total"`     //数量
+	Records []QuerySettleItem `json:"records" structs:"records"` //列表
+}
+
+// 单个settle-item
+type QuerySettleItem struct {
+	//正确的返回
+	PayOrderId  string `json:"payOrderId" structs:"payOrderId"`   //订单号
+	Amount      string `json:"amount" structs:"amount"`           //数量
+	SettleState string `json:"settleState" structs:"settleState"` //结算状态
+	MchOrderNo  string `json:"mchOrderNo" structs:"mchOrderNo"`   //商户订单号
+}
+
 //------------回调返回的参数说明--------------------------
 
 // 回调收到的数据

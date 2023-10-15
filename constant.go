@@ -59,4 +59,6 @@ const (
 	QUERY_ORDER_URL = "https://pay.sailpayment.com/api/pay/query"
 	//查询余额
 	QUERY_BALANCE_URL = "https://pay.sailpayment.com/api/balance/query"
+	//查询订单结算列表或者未结算列表
+	QUERY_SETTLE_LIST_URL = "https://pay.sailpayment.com/api/pay/querySettleList"
 )
