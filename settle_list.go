@@ -3,6 +3,7 @@ package sailpay_client
 import (
 	"encoding/json"
 	"fmt"
+	"github.com/cyrildou/SailPay/util/logger"
 	"github.com/cyrildou/SailPay/util/sign"
 	"github.com/fatih/structs"
 	"github.com/parnurzeal/gorequest"
@@ -53,6 +54,7 @@ func (client *SailPayClient) QuerySettleList(request QuerySettleListRequest) (bo
 
 	//发送请求
 	resp, body, errs := gorequest.New().Post(url).Send(paramStr).EndStruct(&urlResp)
+	logger.Infof("SailPaySdk-settle_list: [reqUrl]%s [reqBody]%s  [respBody]%s, [resp]%+v, [err]:%+v\n", url, paramStr, body, resp, errs)
 	if errs != nil {
 		fmt.Printf("err: body:%s, resp:%+v, info:%+v\n", body, resp, errs)
 		return false, QuerySettleListResponse{}

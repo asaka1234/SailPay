@@ -1,5 +1,7 @@
 package sailpay_client
 
+import "github.com/cyrildou/SailPay/util/logger"
+
 type SailPayClient struct {
 	MchNo         string //商户号
 	PrivateSecret string //私钥
@@ -8,6 +10,9 @@ type SailPayClient struct {
 
 // 实例化请求端
 func NewSailPayClient(mchNo string, appId string, privateSecret string) *SailPayClient {
+
+	logger.Setup()
+
 	var client SailPayClient
 	client.MchNo = mchNo
 	client.AppId = appId
